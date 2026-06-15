@@ -1,168 +1,120 @@
 ## Prompt สำหรับสร้าง Python Script ดึงข้อมูลคาเฟ่จาก Google Maps ผ่าน SerpAPI
 
+```python
 คุณเป็น Senior Python Developer ที่เชี่ยวชาญด้าน Web Scraping และ Google Maps Data Collection
 
 สร้าง Python Script สำหรับดึงข้อมูลร้านคาเฟ่จาก Google Maps ผ่าน SerpAPI โดยใช้โครงสร้างเดียวกับตัวอย่างด้านล่างทุกประการ
 
----
+ข้อกำหนด:
 
-## ข้อกำหนด
+1. ใช้ Python
 
-### 1. ใช้ Python
+2. ใช้ libraries:
 
-### 2. ใช้ Libraries
+   * os
+   * requests
+   * json
+   * time
 
-```python
-import os
-import requests
-import json
-import time
-```
+3. กำหนด
 
-### 3. กำหนด API Key
-
-```python
 API_KEY = "YOUR_API_KEY"
-```
 
-### 4. Base URL
+4. ใช้
 
-```python
 base_url = "https://serpapi.com/search.json"
-```
 
-### 5. Keyword สำหรับค้นหา
+5. ค้นหาด้วย keyword
 
-```python
 queries = ["cafe", "coffee"]
-```
 
-### 6. ดึงข้อมูลหลายหน้า
+6. ดึงข้อมูลหลายหน้า
 
-```python
 starts = [0,20,40,60,80,100]
-```
 
-### 7. จังหวัดที่ต้องการ
+7. จังหวัดที่ต้องการคือ
 
-```text
-จังหวัด: <PROVINCE_NAME>
-```
+จังหวัด: {ชื่อจังหวัด}
 
-### 8. กรณีเลือก "ทุกอำเภอ"
+8. หากระบุอำเภอเป็น "ทุกอำเภอ"
 
-ให้สร้าง `locations` ครบทุกอำเภอของจังหวัด
+ให้สร้าง locations ครบทุกอำเภอของจังหวัดนั้น
 
 ตัวอย่าง
 
-```python
 locations = [
-    ("อำเภอ1", lat, lon),
-    ("อำเภอ2", lat, lon),
-    ("อำเภอ3", lat, lon)
+("อำเภอ1", lat, lon),
+("อำเภอ2", lat, lon),
+...
 ]
-```
 
-### 9. กรณีระบุรายชื่ออำเภอ
+9. หากระบุรายชื่ออำเภอ
 
-ให้สร้างเฉพาะอำเภอที่ระบุ
+ให้สร้างเฉพาะอำเภอเหล่านั้น
 
-### 10. ใช้พิกัดศูนย์กลางของแต่ละอำเภอ
+10. ใช้พิกัดศูนย์กลางของแต่ละอำเภอ
 
-* ต้องเป็น Latitude และ Longitude จริง
-* ห้ามใช้ Placeholder
-* ห้ามใช้ค่าประมาณ
+11. สำหรับแต่ละอำเภอ
 
-### 11. สร้างโฟลเดอร์สำหรับแต่ละอำเภอ
+สร้างโฟลเดอร์
 
-รูปแบบ
-
-```text
 data/{ชื่ออำเภอ}
-```
 
-ตัวอย่าง
+12. เรียก API ด้วย
 
-```text
-data/เมืองเชียงใหม่
-data/สารภี
-data/หางดง
-```
-
-### 12. เรียก SerpAPI
-
-```python
 params = {
-    "engine":"google_maps",
-    "type":"search",
-    "q":q,
-    "ll":f"@{lat},{lon},11z",
-    "nearby":"true",
-    "google_domain":"google.co.th",
-    "hl":"th",
-    "gl":"th",
-    "start":start,
-    "api_key":API_KEY
+"engine":"google_maps",
+"type":"search",
+"q":q,
+"ll":f"@{lat},{lon},11z",
+"nearby":"true",
+"google_domain":"google.co.th",
+"hl":"th",
+"gl":"th",
+"start":start,
+"api_key":API_KEY
 }
-```
 
-### 13. บันทึกไฟล์
+13. บันทึกไฟล์เป็น
 
-```python
-filename = f"{folder}/{q}_{start}_{district}.json"
-```
+filename = f"{folder}/{q}*{start}*{district}.json"
 
-### 14. ใช้ json.dump
+14. ใช้
 
-```python
 json.dump(
-    data,
-    f,
-    ensure_ascii=False,
-    indent=2
+data,
+f,
+ensure_ascii=False,
+indent=2
 )
-```
 
-### 15. หน่วงเวลา
+15. ใส่
+
+time.sleep(1)
 
 หลังเรียก API ทุกครั้ง
 
-```python
-time.sleep(1)
-```
+16. แสดง Progress
 
-### 16. แสดง Progress
-
-```python
 print("fetch:",district,q,start)
-```
 
-### 17. รูปแบบผลลัพธ์
+17. ส่งออกเฉพาะ Python Code
 
-* ส่งออกเฉพาะ Python Code
-* ห้ามอธิบาย
-* ห้ามใส่ Markdown รอบโค้ด
-* ห้ามตัดโค้ด
-* ต้องสามารถ Copy ไปรันได้ทันที
+18. ห้ามอธิบาย
 
-### 18. ข้อกำหนด Locations
+19. ห้ามตัดโค้ด
 
-* ต้องใส่ Latitude จริง
-* ต้องใส่ Longitude จริง
-* ต้องใส่ครบทุกอำเภอที่เลือก
-* ห้ามใช้ Placeholder
-* ห้ามใช้ Dummy Data
+20. ต้องสามารถ Copy ไปรันได้ทันที
 
----
+21. locations ต้องใส่ latitude และ longitude จริงของทุกอำเภอที่เลือก
 
-## งานที่ต้องทำ
+22. ห้ามใส่ค่า Placeholder ใน locations
 
-สร้างโค้ดตาม Template ด้านบน โดยใช้ข้อมูลต่อไปนี้
+สร้างโค้ดตาม Template ด้านบน
 
-```text
-จังหวัด: <PROVINCE_NAME>
+จังหวัด: สระบุรี
 
 อำเภอ:
-- <เมือง>
-- <อำเภออื่น ๆ>
+- เมือง
+- ...
 ```

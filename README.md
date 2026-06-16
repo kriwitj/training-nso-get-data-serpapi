@@ -1,3 +1,55 @@
+## การเตรียมสภาพแวดล้อม
+
+### 1. ติดตั้ง Python
+
+ดาวน์โหลด Python จาก [python.org](https://www.python.org/downloads/) แล้วติดตั้ง
+
+> ติ๊ก **"Add Python to PATH"** ขณะติดตั้ง
+
+ตรวจสอบว่าติดตั้งสำเร็จ:
+
+```cmd
+python --version
+```
+
+---
+
+### 2. ติดตั้ง Library
+
+เปิด Command Prompt แล้วรัน:
+
+```cmd
+pip install pandas requests openpyxl
+```
+
+> library อื่น (`os`, `json`, `time`) เป็น built-in ไม่ต้องติดตั้งเพิ่ม
+
+---
+
+### 3. สร้างไฟล์และรัน Script
+
+#### เปิด Command Prompt แล้วไปยังโฟลเดอร์ที่ต้องการ
+
+```cmd
+cd "D:\training-nso-cafe-data"
+```
+
+#### สร้างไฟล์ Python
+
+```cmd
+type nul > serp-cafe-province.py
+```
+
+> เปิดไฟล์ด้วย Notepad หรือ VS Code แล้วนำโค้ดที่ได้จาก Prompt ด้านล่างไปวาง
+
+#### รัน Script
+
+```cmd
+python serp-cafe-province.py
+```
+
+---
+
 ## Prompt สำหรับสร้าง Python Script ดึงข้อมูลคาเฟ่จาก Google Maps ผ่าน SerpAPI
 
 ```python
@@ -63,16 +115,16 @@ data/{ชื่ออำเภอ}
 12. เรียก API ด้วย
 
 params = {
-"engine":"google_maps",
-"type":"search",
-"q":q,
-"ll":f"@{lat},{lon},11z",
-"nearby":"true",
-"google_domain":"google.co.th",
-"hl":"th",
-"gl":"th",
-"start":start,
-"api_key":API_KEY
+    "engine": "google_maps",          # ใช้ Google Maps Engine
+    "type": "search",                 # ค้นหาแบบ Search
+    "q": q,                           # Keyword ที่ต้องการค้นหา (cafe, coffee)
+    "ll": f"@{lat},{lon},11z",        # พิกัดศูนย์กลาง + ระดับ Zoom
+    "nearby": "true",                 # ค้นหาเฉพาะสถานที่ใกล้พิกัด
+    "google_domain": "google.co.th",  # ใช้ Google ประเทศไทย
+    "hl": "th",                       # แสดงผลภาษาไทย
+    "gl": "th",                       # ระบุประเทศเป็นประเทศไทย
+    "start": start,                   # Offset สำหรับ Pagination
+    "api_key": API_KEY                # SerpAPI API Key
 }
 
 13. บันทึกไฟล์เป็น
